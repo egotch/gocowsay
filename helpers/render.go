@@ -38,7 +38,7 @@ func BuildBalloon(lines []string, maxwidth int) string  {
 
     // middle lines
     for i := 1; i < count-1; i++ {
-      s = fmt.Sprintf("%s %s %s", boarders[3], lines[i], boarders[3])
+      s = fmt.Sprintf("%s %s %s", boarders[4], lines[i], boarders[4])
       innards = append(innards, s)
     }
 

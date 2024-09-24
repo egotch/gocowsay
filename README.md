@@ -2,19 +2,28 @@
 
 a clone of the hilarious linux cli classic `cowsay`
 
+## Install via Go
+
+`go get github.com/egotch/gocowsay`
+
+```bash
+go install github.com/egotch/gocowsay
+```
+
 ## Usage
-* pull repo
-* `go build .`
-* `go install .`
+
+* only accepts piped input (i.e. `fortune | gocowsay`)
+* can specify the figure to read back text
+    * -f arg specifies the figure (cow, stego, rnd)
 
 ## Examples
 
 
-`fortune | gocowsay`
+```bash
+fortune | gocowsay -f stego
+```
 
 ```
-bash
-
  -----------------------------------------
 /                                         \
 | Exercise caution in your daily affairs. |

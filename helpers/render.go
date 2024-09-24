@@ -8,7 +8,7 @@ import (
 // BuildBalloon is a public function
 // taks in a slice of strings of max width maxwidth
 // prepends/appends margins on the first and last line, and at the start/end of each line
-// and returns a srring wi the the contents of the balloon
+// and returns a string with the the contents of the balloon
 func BuildBalloon(lines []string, maxwidth int) string  {
 
   // var declarations
@@ -31,6 +31,20 @@ func BuildBalloon(lines []string, maxwidth int) string  {
     
   } else {
     // multiple lines
+
+    // first line
+    s := fmt.Sprintf("%s %s %s", boarders[0], lines[0], boarders[1])
+    innards = append(innards, s)
+
+    // middle lines
+    for i := 1; i < count-1; i++ {
+      s = fmt.Sprintf("%s %s %s", boarders[3], lines[i], boarders[3])
+      innards = append(innards, s)
+    }
+
+    // last line
+    s = fmt.Sprintf("%s %s %s", boarders[2], lines[len(lines)-1], boarders[3])
+    innards = append(innards, s)
     
   }
 
@@ -40,3 +54,4 @@ func BuildBalloon(lines []string, maxwidth int) string  {
   ret = append(ret, topBtm)
   return strings.Join(ret, "\n")
 }
+

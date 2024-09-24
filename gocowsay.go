@@ -1,6 +1,9 @@
 package main
 
 import (
+  "github.com/egotch/gocowsay/ascii"
+  "github.com/egotch/gocowsay/helpers"
+
 	"bufio"
 	"fmt"
 	"io"
@@ -9,8 +12,8 @@ import (
 
 // main entry point
 func main()  {
-  var output []rune
 
+  var lines []string
 
   info, _ := os.Stdin.Stat()
 
@@ -20,20 +23,28 @@ func main()  {
     return
   }
 
+  // fetch and iterate over the input
   reader := bufio.NewReader(os.Stdin)
 
   for {
-    input, _, err := reader.ReadRune()
+    line, _, err := reader.ReadLine()
     if err != nil && err == io.EOF {
       break
     }
 
-    output = append(output, input)
+    lines = append(lines, string(line))
   }
 
-  for j:=0; j<len(output); j++{
-    fmt.Printf("%c", output[j])
     
-  }
-    
+  // build the bubble and cow
+  lines = helpers.TabsToSpaces(lines)
+  maxWidth := helpers.CalcMaxWidth(lines)
+  normLines := helpers.NormalizeLineLen(lines, maxWidth)
+  balloon := helpers.BuildBalloon(normLines, maxWidth)
+  cow := ascii.Cow
+
+  fmt.Println(balloon)
+  fmt.Println(cow)
+  fmt.Println()
+
 }

@@ -1,8 +1,10 @@
 package main
 
 import (
-  "github.com/egotch/gocowsay/ascii"
-  "github.com/egotch/gocowsay/helpers"
+	"flag"
+
+	"github.com/egotch/gocowsay/ascii"
+	"github.com/egotch/gocowsay/helpers"
 
 	"bufio"
 	"fmt"
@@ -14,6 +16,10 @@ import (
 func main()  {
 
   var lines []string
+
+  figPtr := flag.String("f", "rnd", "select which animal figure to have talk back cow, stego, or rnd!")
+
+  flag.Parse()
 
   info, _ := os.Stdin.Stat()
 
@@ -41,10 +47,10 @@ func main()  {
   maxWidth := helpers.CalcMaxWidth(lines)
   normLines := helpers.NormalizeLineLen(lines, maxWidth)
   balloon := helpers.BuildBalloon(normLines, maxWidth)
-  cow := ascii.Cow
+  animal := ascii.GetAnimal(*figPtr)
 
   fmt.Println(balloon)
-  fmt.Println(cow)
+  fmt.Println(animal)
   fmt.Println()
 
 }
